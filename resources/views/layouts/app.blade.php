@@ -419,6 +419,22 @@
             <nav class="nav-links">
                 <a href="{{ route('albuns.index') }}" class="{{ Request::is('albuns*') ? 'active' : '' }}">Álbuns</a>
                 <a href="{{ route('musicas.create') }}" class="{{ Request::is('musicas/create') ? 'active' : '' }}">Nova Música</a>
+                <a href="{{ route('posts.index') }}" class="{{ Request::is('posts*') ? 'active' : '' }}">Mural</a>
+                
+                <span style="color: var(--border-color); display: flex; align-items: center;">|</span>
+                
+                @auth
+                    <span style="color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 4px;">
+                        Olá, <strong>{{ auth()->user()->name }}</strong>
+                    </span>
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline; align-self: center; margin: 0;">
+                        @csrf
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" style="color: #f77171; font-weight: 600; text-decoration: none;">Sair</a>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="{{ Request::is('login') ? 'active' : '' }}">Entrar</a>
+                    <a href="{{ route('register') }}" class="{{ Request::is('register') ? 'active' : '' }}">Registrar</a>
+                @endauth
             </nav>
         </div>
     </header>
